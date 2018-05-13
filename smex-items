@@ -1,20 +1,20 @@
 
 ;; ----- smex-history -----
 (
+ eval-buffer
+ global-auto-revert-mode
  paredit-mode
  scheme-mode
- eval-buffer
  package-install
  replace-string
  org-agenda
- nodejs-repl
 )
 
 ;; ----- smex-data -----
 (
  (package-autoremove . 1)
  (recentf-mode . 1)
- (eval-buffer . 8)
+ (eval-buffer . 9)
  (customize-group . 2)
  (javascript-mode . 2)
  (nodejs-repl . 1)
@@ -23,5 +23,6 @@
  (replace-string . 1)
  (scheme-mode . 5)
  (package-install . 1)
- (paredit-mode . 2)
+ (paredit-mode . 3)
+ (global-auto-revert-mode . 1)
 )
