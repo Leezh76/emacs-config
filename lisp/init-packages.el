@@ -21,8 +21,6 @@
 		 ) "Default packages")
 (setq packages-selected-packages 'my/pkgs)
 
-(load-theme 'solarized-light t)
-
 (defun my/pkg-installed-p()
   (loop for pkg in my/pkgs
 	when (not (package-installed-p pkg)) do (return nil)
@@ -43,9 +41,11 @@
 
 (require 'smex)
 (smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
 
-(require 'smartparens-config)
+(load-theme 'solarized-light t)
+
+;;(require 'smartparens-config)
+;;autoload don't need to require
 ;;(add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
 (smartparens-global-mode t)
 
