@@ -2,27 +2,34 @@
 ;; ----- smex-history -----
 (
  eval-buffer
- global-auto-revert-mode
- paredit-mode
+ hippie-expand
+ js2-mode
+ c++-mode
+ fundamental-mode
+ find-function
  scheme-mode
- package-install
- replace-string
- org-agenda
 )
 
 ;; ----- smex-data -----
 (
  (package-autoremove . 1)
  (recentf-mode . 1)
- (eval-buffer . 9)
+ (eval-buffer . 10)
  (customize-group . 2)
  (javascript-mode . 2)
  (nodejs-repl . 1)
  (org-agenda . 3)
  (replace-amp . 2)
  (replace-string . 1)
- (scheme-mode . 5)
+ (scheme-mode . 7)
  (package-install . 1)
  (paredit-mode . 3)
  (global-auto-revert-mode . 1)
+ (term . 1)
+ (find-function . 1)
+ (fundamental-mode . 1)
+ (c++-mode . 1)
+ (js2-mode . 1)
+ (ident-buffer . 1)
+ (hippie-expand . 2)
 )

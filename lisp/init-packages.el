@@ -18,6 +18,7 @@
 		 window-numbering
 		 paredit
 		 popwin
+		 counsel
 		 ) "Default packages")
 (setq packages-selected-packages 'my/pkgs)
 
