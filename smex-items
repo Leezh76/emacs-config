@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
+ org-capture
+ iedit-mode
  counsel-imenu
  customize-group
  occur-edit-mode
  customize-variable
  js2-mode
- web-mode
- org-mode
 )
 
 ;; ----- smex-data -----
@@ -44,4 +44,6 @@
  (counsel-imenu . 3)
  (customize-variable . 1)
  (occur-edit-mode . 2)
+ (iedit-mode . 1)
+ (org-capture . 1)
 )
