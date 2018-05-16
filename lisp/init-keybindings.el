@@ -14,7 +14,7 @@
 
 (global-key-binding (kbd "C-M-\\") 'indent-region-or-buffer)
 
-(global-set-key (kbd "s-/") 'hippie-expand)
+(global-set-key (kbd "M-/") 'hippie-expand)
 
 (with-eval-after-load 'dired
   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))

@@ -1,24 +1,24 @@
 
 ;; ----- smex-history -----
 (
- eval-buffer
- hippie-expand
+ counsel-imenu
+ customize-group
+ occur-edit-mode
+ customize-variable
  js2-mode
- c++-mode
- fundamental-mode
- find-function
- scheme-mode
+ web-mode
+ org-mode
 )
 
 ;; ----- smex-data -----
 (
  (package-autoremove . 1)
  (recentf-mode . 1)
- (eval-buffer . 10)
- (customize-group . 2)
+ (eval-buffer . 11)
+ (customize-group . 6)
  (javascript-mode . 2)
  (nodejs-repl . 1)
- (org-agenda . 3)
+ (org-agenda . 4)
  (replace-amp . 2)
  (replace-string . 1)
  (scheme-mode . 7)
@@ -29,7 +29,19 @@
  (find-function . 1)
  (fundamental-mode . 1)
  (c++-mode . 1)
- (js2-mode . 1)
+ (js2-mode . 2)
  (ident-buffer . 1)
  (hippie-expand . 2)
+ (org-mode . 2)
+ (customize . 1)
+ (info . 1)
+ (emacs-lisp-mode . 1)
+ (buffer-menu . 1)
+ (counsel-grep . 1)
+ (ibuffer . 1)
+ (html-mode . 1)
+ (web-mode . 4)
+ (counsel-imenu . 3)
+ (customize-variable . 1)
+ (occur-edit-mode . 2)
 )
