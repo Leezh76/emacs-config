@@ -23,7 +23,8 @@
 		 web-mode
 		 expand-region
 		 iedit
-		; org-pomodoro
+		 ;; org-pomodoro
+		 helm-ag		
 		 ) "Default packages")
 (setq packages-selected-packages 'my/pkgs)
 
@@ -129,6 +130,6 @@
 
 ;;(global-set-key (kbd "M-s e") 'iedit-mode)
 
-;; (require 'org-pomodoro)
+;(require 'org-pomodoro)
 
 (provide 'init-packages)

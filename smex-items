@@ -1,12 +1,12 @@
 
 ;; ----- smex-history -----
 (
+ package-list-packages
+ package-delete
+ package-install
+ customize-group
  nodejs-repl
  js2-mode
- ielm
- tetris
- eval-region
- describe-bindings
  eval-buffer
 )
 
@@ -15,14 +15,14 @@
  (package-autoremove . 1)
  (recentf-mode . 1)
  (eval-buffer . 11)
- (customize-group . 6)
+ (customize-group . 8)
  (javascript-mode . 2)
  (nodejs-repl . 3)
  (org-agenda . 4)
  (replace-amp . 2)
  (replace-string . 1)
  (scheme-mode . 7)
- (package-install . 1)
+ (package-install . 2)
  (paredit-mode . 3)
  (global-auto-revert-mode . 1)
  (term . 1)
@@ -51,4 +51,7 @@
  (eval-region . 1)
  (tetris . 1)
  (ielm . 1)
+ (org-pomodoro . 1)
+ (package-list-packages . 3)
+ (package-delete . 1)
 )
