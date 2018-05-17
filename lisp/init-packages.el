@@ -3,7 +3,10 @@
   (package-initialize)
   ;;(setq package-archives '(("gnu" . "https://elpa.emacs-china.org/gnu/")
   ;;			   ("melpa" . "https://elpa.emacs-china.org/melpa/"))))
-  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/")))
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+  ;;(add-to-list 'package-archives '("popkit" . "http://elpa.popkit.org/packages/"))
+  )
+
 (require 'cl)
 ;;add package here
 (defvar my/pkgs '(
@@ -24,7 +27,9 @@
 		 expand-region
 		 iedit
 		 ;; org-pomodoro
-		 helm-ag		
+		 helm-ag
+		 flycheck
+		 ;;auto-yasnippet
 		 ) "Default packages")
 (setq packages-selected-packages 'my/pkgs)
 
@@ -131,5 +136,12 @@
 ;;(global-set-key (kbd "M-s e") 'iedit-mode)
 
 ;(require 'org-pomodoro)
+
+(add-hook 'js2-mode 'flycheck-mode)
+
+(yas-reload-all)
+(add-hook 'prog-mode-hook #'yas-minor-mode)
+
+
 
 (provide 'init-packages)
