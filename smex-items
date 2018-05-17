@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- org-capture
- iedit-mode
- counsel-imenu
- customize-group
- occur-edit-mode
- customize-variable
+ nodejs-repl
  js2-mode
+ ielm
+ tetris
+ eval-region
+ describe-bindings
+ eval-buffer
 )
 
 ;; ----- smex-data -----
@@ -17,7 +17,7 @@
  (eval-buffer . 11)
  (customize-group . 6)
  (javascript-mode . 2)
- (nodejs-repl . 1)
+ (nodejs-repl . 3)
  (org-agenda . 4)
  (replace-amp . 2)
  (replace-string . 1)
@@ -29,7 +29,7 @@
  (find-function . 1)
  (fundamental-mode . 1)
  (c++-mode . 1)
- (js2-mode . 2)
+ (js2-mode . 3)
  (ident-buffer . 1)
  (hippie-expand . 2)
  (org-mode . 2)
@@ -46,4 +46,9 @@
  (occur-edit-mode . 2)
  (iedit-mode . 1)
  (org-capture . 1)
+ (org-clock-in . 1)
+ (describe-bindings . 1)
+ (eval-region . 1)
+ (tetris . 1)
+ (ielm . 1)
 )
