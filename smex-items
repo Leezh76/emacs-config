@@ -1,20 +1,20 @@
 
 ;; ----- smex-history -----
 (
- package-delete
  package-list-packages
+ TeX-mode
+ eval-buffer
+ evil-mode
+ compile
+ package-delete
  package-install
- org-mode
- LaTeX-mode
- js2-mode
- helm-ag
 )
 
 ;; ----- smex-data -----
 (
  (package-autoremove . 1)
  (recentf-mode . 1)
- (eval-buffer . 11)
+ (eval-buffer . 12)
  (customize-group . 8)
  (javascript-mode . 2)
  (nodejs-repl . 3)
@@ -52,8 +52,11 @@
  (tetris . 1)
  (ielm . 1)
  (org-pomodoro . 1)
- (package-list-packages . 4)
+ (package-list-packages . 6)
  (package-delete . 6)
  (helm-ag . 2)
  (LaTeX-mode . 1)
+ (compile . 1)
+ (evil-mode . 4)
+ (TeX-mode . 1)
 )

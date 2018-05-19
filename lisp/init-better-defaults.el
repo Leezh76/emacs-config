@@ -95,4 +95,11 @@
 (global-set-key (kbd "M-s o") 'occur-dwim)
 
 
+;; auctex settings
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+(add-to-list 'load-path "/Applications/Emacs.app/Contents/Resources/site-lisp/")
+(add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)
+(autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
+(autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
+
 (provide 'init-better-defaults)

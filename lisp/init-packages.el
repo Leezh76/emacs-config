@@ -31,6 +31,9 @@
 		 flycheck
 		 ;;auto-yasnippet
 		 ivy
+		 evil
+		 auctex
+		 cdlatex
 		 ) "Default packages")
 (setq packages-selected-packages 'my/pkgs)
 
