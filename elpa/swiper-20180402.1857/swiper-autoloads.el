@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "swiper" "swiper.el" (23288 1783 647230 683000))
+;;;### (autoloads nil "swiper" "swiper.el" (23295 37926 817230 329000))
 ;;; Generated autoloads from swiper.el
 
 (autoload 'swiper-avy "swiper" "\

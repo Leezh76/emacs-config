@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
+ package-delete
+ package-list-packages
+ package-install
+ org-mode
+ LaTeX-mode
  js2-mode
  helm-ag
- package-list-packages
- package-delete
- package-install
- customize-group
- nodejs-repl
 )
 
 ;; ----- smex-data -----
@@ -22,7 +22,7 @@
  (replace-amp . 2)
  (replace-string . 1)
  (scheme-mode . 7)
- (package-install . 2)
+ (package-install . 3)
  (paredit-mode . 3)
  (global-auto-revert-mode . 1)
  (term . 1)
@@ -32,7 +32,7 @@
  (js2-mode . 4)
  (ident-buffer . 1)
  (hippie-expand . 2)
- (org-mode . 2)
+ (org-mode . 4)
  (customize . 1)
  (info . 1)
  (emacs-lisp-mode . 1)
@@ -52,7 +52,8 @@
  (tetris . 1)
  (ielm . 1)
  (org-pomodoro . 1)
- (package-list-packages . 3)
- (package-delete . 1)
+ (package-list-packages . 4)
+ (package-delete . 6)
  (helm-ag . 2)
+ (LaTeX-mode . 1)
 )

@@ -30,6 +30,7 @@
 		 helm-ag
 		 flycheck
 		 ;;auto-yasnippet
+		 ivy
 		 ) "Default packages")
 (setq packages-selected-packages 'my/pkgs)
 

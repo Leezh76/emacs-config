@@ -4,7 +4,7 @@
 
 ;; Author: Oleh Krehel <ohwoeowho@gmail.com>
 ;; URL: https://github.com/abo-abo/swiper
-;; Package-Version: 20180507.1200
+;; Package-Version: 20180517.1140
 ;; Version: 0.10.0
 ;; Package-Requires: ((emacs "24.3") (swiper "0.9.0"))
 ;; Keywords: completion, matching
@@ -67,10 +67,16 @@
        ".*")
     (let ((start 0)
           ms)
-      (while (setq start (string-match "\\\\)\\|\\\\(\\|[()]" str start))
+      (while (setq start (string-match "\\\\)\\|\\\\(\\|\\\\{\\|\\\\}\\|[()]" str start))
         (setq ms (match-string-no-properties 0 str))
         (cond ((equal ms "\\(")
                (setq str (replace-match "(" nil t str))
+               (setq start (+ start 1)))
+              ((equal ms "\\{")
+               (setq str (replace-match "{" nil t str))
+               (setq start (+ start 1)))
+              ((equal ms "\\}")
+               (setq str (replace-match "}" nil t str))
                (setq start (+ start 1)))
               ((equal ms "\\)")
                (setq str (replace-match ")" nil t str))
@@ -85,10 +91,11 @@
                (error "Unexpected"))))
       str)))
 
-(defun counsel-directory-parent (dir)
-  "Return the directory parent of directory DIR."
-  (concat (file-name-nondirectory
-           (directory-file-name dir)) "/"))
+(defun counsel-directory-name (dir)
+  "Return the name of directory DIR with a slash."
+  (file-name-as-directory
+   (file-name-nondirectory
+    (directory-file-name dir))))
 
 (defun counsel-string-compose (prefix str)
   "Make PREFIX the display prefix of STR through text properties."
@@ -150,7 +157,8 @@ respectively."
         proc)
     (when (get-buffer name)
       (kill-buffer name))
-    (setq proc (start-file-process-shell-command name name cmd))
+    (setq proc (start-file-process-shell-command
+                name (get-buffer-create name) cmd))
     (setq counsel--async-time (current-time))
     (setq counsel--async-start counsel--async-time)
     (set-process-sentinel proc (or sentinel #'counsel--async-sentinel))
@@ -863,13 +871,13 @@ Optional INITIAL-INPUT is the initial input in the minibuffer."
               (if (setq old-val (gethash short-name cands))
                   (progn
                     ;; assume going up directory once will resolve name clash
-                    (setq dir-parent (counsel-directory-parent (cdr old-val)))
+                    (setq dir-parent (counsel-directory-name (cdr old-val)))
                     (puthash short-name
                              (cons
                               (counsel-string-compose dir-parent (car old-val))
                               (cdr old-val))
                              cands)
-                    (setq dir-parent (counsel-directory-parent dir))
+                    (setq dir-parent (counsel-directory-name dir))
                     (puthash (concat dir-parent short-name)
                              (cons
                               (propertize
@@ -3455,6 +3463,14 @@ PREFIX is used to create the key."
     (define-key map (kbd "C-l") 'ivy-call-and-recenter)
     map))
 
+(defun counsel-imenu-categorize-functions (items)
+  "Categorize all the functions of imenu."
+  (let* ((others (cl-remove-if-not (lambda (x) (listp (cdr x))) items))
+         (functions (cl-remove-if (lambda (x) (listp (cdr x))) items)))
+    (if functions
+        (append others `(("Functions" ,@functions)))
+      items)))
+
 ;;;###autoload
 (defun counsel-imenu ()
   "Jump to a buffer position indexed by imenu."
@@ -3466,7 +3482,8 @@ PREFIX is used to create the key."
                                        (buffer-size)
                                      imenu-auto-rescan-maxout))
          (items (imenu--make-index-alist t))
-         (items (delete (assoc "*Rescan*" items) items)))
+         (items (delete (assoc "*Rescan*" items) items))
+         (items (counsel-imenu-categorize-functions items)))
     (ivy-read "imenu items: " (counsel-imenu-get-candidates-from items)
               :preselect (thing-at-point 'symbol)
               :require-match t
@@ -4405,6 +4422,102 @@ a symbol and how to search for them."
          (push (symbol-name symbol) cands))))
     (delete "" cands)))
 
+;;** `counsel-ibuffer'
+(defvar counsel-ibuffer--buffer-name nil
+  "Name of the buffer to use for `counsel-ibuffer'.")
+
+;;;###autoload
+(defun counsel-ibuffer (&optional name)
+  "Use ibuffer to switch to another buffer.
+NAME specifies the name of the buffer (defaults to \"*Ibuffer*\")."
+  (interactive)
+  (setq counsel-ibuffer--buffer-name (or name "*Ibuffer*"))
+  (ivy-read "Switch to buffer: " (counsel-ibuffer--get-buffers)
+            :history 'counsel-ibuffer-history
+            :action #'counsel-ibuffer-visit-buffer
+            :caller 'counsel-ibuffer))
+
+(declare-function ibuffer-update "ibuffer")
+(declare-function ibuffer-current-buffer "ibuffer")
+(declare-function ibuffer-forward-line "ibuffer")
+(defvar ibuffer-movement-cycle)
+
+(defun counsel-ibuffer--get-buffers ()
+  "Return list of buffer-related lines in Ibuffer as strings."
+  (let ((oldbuf (get-buffer counsel-ibuffer--buffer-name)))
+    (unless oldbuf
+      ;; Avoid messing with the user's precious window/frame configuration.
+      (save-window-excursion
+        (let ((display-buffer-overriding-action
+               '(display-buffer-same-window (inhibit-same-window . nil))))
+          (ibuffer nil counsel-ibuffer--buffer-name nil t))))
+    (with-current-buffer counsel-ibuffer--buffer-name
+      (when oldbuf
+        ;; Forcibly update possibly stale existing buffer.
+        (ibuffer-update nil t))
+      (goto-char (point-min))
+      (let ((ibuffer-movement-cycle nil)
+            entries)
+        (while (not (eobp))
+          (ibuffer-forward-line 1 t)
+          (let ((buf (ibuffer-current-buffer)))
+            ;; We are only interested in buffers we can actually visit.
+            ;; This filters out headings and other unusable entries.
+            (when (buffer-live-p buf)
+              (push (cons (buffer-substring-no-properties
+                           (line-beginning-position)
+                           (line-end-position))
+                          buf)
+                    entries))))
+        (nreverse entries)))))
+
+(defun counsel-ibuffer-visit-buffer (x)
+  "Switch to buffer of candidate X."
+  (switch-to-buffer (cdr x)))
+
+(defun counsel-ibuffer-visit-buffer-other-window (x)
+  "Switch to buffer of candidate X in another window."
+  (switch-to-buffer-other-window (cdr x)))
+
+(defun counsel-ibuffer-visit-ibuffer (_)
+  "Switch to Ibuffer buffer."
+  (switch-to-buffer counsel-ibuffer--buffer-name))
+
+(ivy-set-actions
+ 'counsel-ibuffer
+ '(("j" counsel-ibuffer-visit-buffer-other-window "other window")
+   ("v" counsel-ibuffer-visit-ibuffer "switch to Ibuffer")))
+
+;;** `counsel-switch-to-shell-buffer'
+(defun counsel--buffers-with-mode (mode)
+  "Return names of buffers with MODE as their `major-mode'."
+  (let (bufs)
+    (dolist (buf (buffer-list))
+      (when (eq (buffer-local-value 'major-mode buf) mode)
+        (push (buffer-name buf) bufs)))
+    (nreverse bufs)))
+
+(declare-function shell-mode "shell")
+
+;;;###autoload
+(defun counsel-switch-to-shell-buffer ()
+  "Switch to a shell buffer, or create one."
+  (interactive)
+  (ivy-read "Shell buffer: " (counsel--buffers-with-mode #'shell-mode)
+            :action #'counsel--switch-to-shell
+            :caller 'counsel-switch-to-shell-buffer))
+
+(defun counsel--switch-to-shell (name)
+  "Display shell buffer with NAME and select its window.
+Reuse any existing window already displaying the named buffer.
+If there is no such buffer, start a new `shell' with NAME."
+  (if (get-buffer name)
+      (pop-to-buffer name '((display-buffer-reuse-window
+                             display-buffer-same-window)
+                            (inhibit-same-window . nil)
+                            (reusable-frames . visible)))
+    (shell name)))
+
 ;;** `counsel-mode'
 (defvar counsel-mode-map
   (let ((map (make-sparse-keymap)))
@@ -4434,41 +4547,6 @@ Remaps built-in functions to counsel replacements.")
   :group 'ivy
   :type 'boolean)
 
-(defun counsel-list-buffers-with-mode (mode)
-  "Return names of buffers with `major-mode' `eq' to MODE."
-  (let (bufs)
-    (dolist (buf (buffer-list))
-      (when (eq (buffer-local-value 'major-mode buf) mode)
-        (push (buffer-name buf) bufs)))
-    (nreverse bufs)))
-
-;;;###autoload
-(defun counsel-switch-to-shell-buffer ()
-  "Switch to a shell buffer, or create one."
-  (interactive)
-  (ivy-read "Switch to shell buffer: "
-            (counsel-list-buffers-with-mode 'shell-mode)
-            :action #'counsel-switch-to-buffer-or-window
-            :caller 'counsel-switch-to-shell-buffer))
-
-(defun counsel-switch-to-buffer-or-window (buffer-name)
-  "Display buffer BUFFER-NAME and select its window.
-
-This behaves as `switch-to-buffer', except when the buffer is
-already visible; in that case, select the window corresponding to
-the buffer."
-  (let ((buffer (get-buffer buffer-name)))
-    (if (not buffer)
-        (shell buffer-name)
-      (let (window-of-buffer-visible)
-        (catch 'found
-          (walk-windows (lambda (window)
-                          (and (equal (window-buffer window) buffer)
-                               (throw 'found (setq window-of-buffer-visible window))))))
-        (if window-of-buffer-visible
-            (select-window window-of-buffer-visible)
-          (switch-to-buffer buffer))))))
-
 ;;;###autoload
 (define-minor-mode counsel-mode
   "Toggle Counsel mode on or off.
@@ -4488,83 +4566,6 @@ replacements. "
           'counsel-minibuffer-history))
     (when (fboundp 'advice-remove)
       (advice-remove #'describe-bindings #'counsel-descbinds))))
-
-;;** `counsel-ibuffer'
-(defvar counsel-ibuffer--buffer-name nil
-  "Name of the buffer to use for `counsel-ibuffer'.")
-
-;;;###autoload
-(defun counsel-ibuffer (&optional name)
-  "Use ibuffer to switch to another buffer.
-NAME specifies the name of the buffer (defaults to \"*Ibuffer*\")."
-  (interactive)
-  (setq counsel-ibuffer--buffer-name (or name "*Ibuffer*"))
-  (let ((entries (counsel-ibuffer--get-buffers)))
-    (ivy-read "Switch to buffer: "
-              entries
-              :history 'counsel-ibuffer-history
-              :action 'counsel-ibuffer-visit-buffer
-              :caller 'counsel-ibuffer)))
-
-(declare-function ibuffer-update "ibuffer")
-(declare-function ibuffer-current-buffer "ibuffer")
-(declare-function ibuffer-forward-line "ibuffer")
-(defvar ibuffer-movement-cycle)
-
-(defun counsel-ibuffer--get-buffers ()
-  "Get buffers listed in ibuffer."
-  (let* ((ibuffer-buf (get-buffer counsel-ibuffer--buffer-name))
-         (new-ibuffer-p (not ibuffer-buf))
-         (ibuffer-movement-cycle t)
-         entries)
-    (when new-ibuffer-p
-      (ibuffer nil counsel-ibuffer--buffer-name)
-      (setq ibuffer-buf (current-buffer))
-      (quit-window))
-    (with-current-buffer ibuffer-buf
-      ;; ibuffer might not be up to date in case we use an existing buffer.
-      (unless new-ibuffer-p
-        (ibuffer-update nil t))
-      (goto-char (point-min))
-      ;; `ibuffer-forward-line` wraps around, we guard against it by
-      ;; using the point of the first entry and make sure we abort as
-      ;; soon as we encounter it for the second time.
-      (let ((first-point 0))
-        (while (> (point) first-point)
-          (let ((current-buf (ibuffer-current-buffer)))
-            ;; We are only interested in buffers we can actually visit.
-            ;; This filters out headings and other unusable entries.
-            (when (buffer-live-p current-buf)
-              (push
-               (cons
-                (buffer-substring-no-properties
-                 (line-beginning-position)
-                 (line-end-position))
-                current-buf)
-               entries)
-              ;; Remember point of the first entry as we will wrap
-              ;; around to it.
-              (when (= first-point 0)
-                (setq first-point (point)))))
-          (ibuffer-forward-line 1 t))))
-    (nreverse entries)))
-
-(defun counsel-ibuffer-visit-buffer (x)
-  "Switch to buffer of candidate X."
-  (switch-to-buffer (cdr x)))
-
-(defun counsel-ibuffer-visit-buffer-other-window (x)
-  "Switch to buffer of candidate X in other window."
-  (switch-to-buffer-other-window (cdr x)))
-
-(defun counsel-ibuffer-visit-vanilla-ibuffer (_)
-  "Switch to vanilla ibuffer."
-  (switch-to-buffer counsel-ibuffer--buffer-name))
-
-(ivy-set-actions
- 'counsel-ibuffer
- '(("j" counsel-ibuffer-visit-buffer-other-window "other window")
-   ("v" counsel-ibuffer-visit-vanilla-ibuffer "open vanilla ibuffer")))
 
 (provide 'counsel)
 

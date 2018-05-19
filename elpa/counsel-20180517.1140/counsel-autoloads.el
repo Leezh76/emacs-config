@@ -1,10 +1,9 @@
-;;; ivy-autoloads.el --- automatically extracted autoloads
+;;; counsel-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "counsel" "counsel.el" (23293 11071 377264
-;;;;;;  780000))
+;;;### (autoloads nil "counsel" "counsel.el" (23295 37934 97953 0))
 ;;; Generated autoloads from counsel.el
 
 (autoload 'counsel-el "counsel" "\
@@ -53,7 +52,7 @@ or radio, offer completion of all possible values.
 Otherwise, offer a variant of `eval-expression', with the initial
 input corresponding to the chosen variable.
 
-\(fn)" t nil)
+\(fn SYM)" t nil)
 
 (autoload 'counsel-info-lookup-symbol "counsel" "\
 Forward to `info-lookup-symbol' with ivy completion.
@@ -159,10 +158,12 @@ INITIAL-INPUT can be given as the initial minibuffer input.
 \(fn &optional INITIAL-INPUT)" t nil)
 
 (autoload 'counsel-fzf "counsel" "\
-Call the \"fzf\" shell command.
+Open a file using the fzf shell command.
 INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+FZF-PROMPT, if non-nil, is passed as `ivy-read' prompt argument.
 
-\(fn &optional INITIAL-INPUT)" t nil)
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY FZF-PROMPT)" t nil)
 
 (autoload 'counsel-dpkg "counsel" "\
 Call the \"dpkg\" shell command.
@@ -225,7 +226,7 @@ RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument.
 \(fn &optional INITIAL-INPUT INITIAL-DIRECTORY EXTRA-RG-ARGS RG-PROMPT)" t nil)
 
 (autoload 'counsel-grep "counsel" "\
-Grep for a string in the current file.
+Grep for a string in the file visited by the current buffer.
 When non-nil, INITIAL-INPUT is the initial search pattern.
 
 \(fn &optional INITIAL-INPUT)" t nil)
@@ -261,6 +262,11 @@ Browse all attachments for current Org file.
 
 \(fn)" t nil)
 
+(autoload 'counsel-org-entity "counsel" "\
+Complete Org entities using Ivy.
+
+\(fn)" t nil)
+
 (autoload 'counsel-org-capture "counsel" "\
 Capture something.
 
@@ -273,8 +279,13 @@ Text-mode emulation of looking and choosing from a menubar.
 
 (autoload 'counsel-yank-pop "counsel" "\
 Ivy replacement for `yank-pop'.
+ARG has the same meaning as in `yank-pop', but its default value
+can be controlled with `counsel-yank-pop-preselect-last', which
+see.  See also `counsel-yank-pop-filter' for how to filter
+candidates.
+Note: Duplicate elements of `kill-ring' are always deleted.
 
-\(fn)" t nil)
+\(fn &optional ARG)" t nil)
 
 (autoload 'counsel-imenu "counsel" "\
 Jump to a buffer position indexed by imenu.
@@ -314,6 +325,11 @@ Browse shell history.
 
 \(fn)" t nil)
 
+(autoload 'counsel-outline "counsel" "\
+Jump to outline with completion.
+
+\(fn)" t nil)
+
 (autoload 'counsel-rhythmbox "counsel" "\
 Choose a song from the Rhythmbox library to play or enqueue.
 
@@ -332,16 +348,16 @@ Complete using `company-candidates'.
 (autoload 'counsel-colors-emacs "counsel" "\
 Show a list of all supported colors for a particular frame.
 
-You can insert or kill the name or the hexadecimal rgb value of the
-selected candidate.
+You can insert or kill the name or hexadecimal RGB value of the
+selected color.
 
 \(fn)" t nil)
 
 (autoload 'counsel-colors-web "counsel" "\
 Show a list of all W3C web colors for use in CSS.
 
-You can insert or kill the name or the hexadecimal rgb value of the
-selected candidate.
+You can insert or kill the name or hexadecimal RGB value of the
+selected color.
 
 \(fn)" t nil)
 
@@ -361,6 +377,12 @@ See `apropos' for further information about what is considered
 a symbol and how to search for them.
 
 \(fn)" t nil)
+
+(autoload 'counsel-ibuffer "counsel" "\
+Use ibuffer to switch to another buffer.
+NAME specifies the name of the buffer (defaults to \"*Ibuffer*\").
+
+\(fn &optional NAME)" t nil)
 
 (autoload 'counsel-switch-to-shell-buffer "counsel" "\
 Switch to a shell buffer, or create one.
@@ -387,154 +409,9 @@ replacements.
 
 ;;;***
 
-;;;### (autoloads nil "ivy" "ivy.el" (23293 11071 387915 270000))
-;;; Generated autoloads from ivy.el
-
-(autoload 'ivy-resume "ivy" "\
-Resume the last completion session.
-
-\(fn)" t nil)
-
-(autoload 'ivy-read "ivy" "\
-Read a string in the minibuffer, with completion.
-
-PROMPT is a format string, normally ending in a colon and a
-space; %d anywhere in the string is replaced by the current
-number of matching candidates.  For the literal % character,
-escape it with %%. See also `ivy-count-format'.
-
-COLLECTION is either a list of strings, a function, an alist, or
-a hash table.
-
-PREDICATE is applied to filter out the COLLECTION immediately.
-This argument is for `completing-read' compat.
-
-When REQUIRE-MATCH is non-nil, only members of COLLECTION can be
-selected, i.e. custom text.
-
-If INITIAL-INPUT is not nil, then insert that input in the
-minibuffer initially.
-
-HISTORY is a name of a variable to hold the completion session
-history.
-
-KEYMAP is composed with `ivy-minibuffer-map'.
-
-If PRESELECT is not nil, then select the corresponding candidate
-out of the ones that match the INITIAL-INPUT.
-
-DEF is for compatibility with `completing-read'.
-
-UPDATE-FN is called each time the current candidate(s) is changed.
-
-When SORT is t, use `ivy-sort-functions-alist' for sorting.
-
-ACTION is a lambda function to call after selecting a result.  It
-takes a single string argument.
-
-UNWIND is a lambda function to call before exiting.
-
-RE-BUILDER is a lambda function to call to transform text into a
-regex pattern.
-
-MATCHER is to override matching.
-
-DYNAMIC-COLLECTION is a boolean to specify if the list of
-candidates is updated after each input by calling COLLECTION.
-
-CALLER is a symbol to uniquely identify the caller to `ivy-read'.
-It is used, along with COLLECTION, to determine which
-customizations apply to the current completion session.
-
-\(fn PROMPT COLLECTION &key PREDICATE REQUIRE-MATCH INITIAL-INPUT HISTORY PRESELECT DEF KEYMAP UPDATE-FN SORT ACTION UNWIND RE-BUILDER MATCHER DYNAMIC-COLLECTION CALLER)" nil nil)
-
-(autoload 'ivy-completing-read "ivy" "\
-Read a string in the minibuffer, with completion.
-
-This interface conforms to `completing-read' and can be used for
-`completing-read-function'.
-
-PROMPT is a string that normally ends in a colon and a space.
-COLLECTION is either a list of strings, an alist, an obarray, or a hash table.
-PREDICATE limits completion to a subset of COLLECTION.
-REQUIRE-MATCH is a boolean value.  See `completing-read'.
-INITIAL-INPUT is a string inserted into the minibuffer initially.
-HISTORY is a list of previously selected inputs.
-DEF is the default value.
-INHERIT-INPUT-METHOD is currently ignored.
-
-\(fn PROMPT COLLECTION &optional PREDICATE REQUIRE-MATCH INITIAL-INPUT HISTORY DEF INHERIT-INPUT-METHOD)" nil nil)
-
-(defvar ivy-mode nil "\
-Non-nil if Ivy mode is enabled.
-See the `ivy-mode' command
-for a description of this minor mode.
-Setting this variable directly does not take effect;
-either customize it (see the info node `Easy Customization')
-or call the function `ivy-mode'.")
-
-(custom-autoload 'ivy-mode "ivy" nil)
-
-(autoload 'ivy-mode "ivy" "\
-Toggle Ivy mode on or off.
-Turn Ivy mode on if ARG is positive, off otherwise.
-Turning on Ivy mode sets `completing-read-function' to
-`ivy-completing-read'.
-
-Global bindings:
-\\{ivy-mode-map}
-
-Minibuffer bindings:
-\\{ivy-minibuffer-map}
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'ivy-switch-buffer "ivy" "\
-Switch to another buffer.
-
-\(fn)" t nil)
-
-(autoload 'ivy-switch-view "ivy" "\
-Switch to one of the window views stored by `ivy-push-view'.
-
-\(fn)" t nil)
-
-(autoload 'ivy-switch-buffer-other-window "ivy" "\
-Switch to another buffer in another window.
-
-\(fn)" t nil)
-
-;;;***
-
-;;;### (autoloads nil "swiper" "swiper.el" (23293 11071 407991 949000))
-;;; Generated autoloads from swiper.el
-
-(autoload 'swiper-avy "swiper" "\
-Jump to one of the current swiper candidates.
-
-\(fn)" t nil)
-
-(autoload 'swiper "swiper" "\
-`isearch' with an overview.
-When non-nil, INITIAL-INPUT is the initial search pattern.
-
-\(fn &optional INITIAL-INPUT)" t nil)
-
-(autoload 'swiper-all "swiper" "\
-Run `swiper' for all open buffers.
-
-\(fn)" t nil)
-
-;;;***
-
-;;;### (autoloads nil nil ("colir.el" "ivy-hydra.el" "ivy-overlay.el"
-;;;;;;  "ivy-pkg.el" "ivy-test.el") (23293 11071 410340 889000))
-
-;;;***
-
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
 ;; End:
-;;; ivy-autoloads.el ends here
+;;; counsel-autoloads.el ends here
