@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
+ LaTeX-mode
+ getenv
  package-list-packages
  TeX-mode
  eval-buffer
  evil-mode
  compile
- package-delete
- package-install
 )
 
 ;; ----- smex-data -----
@@ -55,8 +55,9 @@
  (package-list-packages . 6)
  (package-delete . 6)
  (helm-ag . 2)
- (LaTeX-mode . 1)
+ (LaTeX-mode . 2)
  (compile . 1)
  (evil-mode . 4)
  (TeX-mode . 1)
+ (getenv . 1)
 )
