@@ -1,27 +1,27 @@
 
 ;; ----- smex-history -----
 (
- LaTeX-mode
- getenv
+ run-geiser
+ scheme-mode
+ package-delete
  package-list-packages
- TeX-mode
  eval-buffer
- evil-mode
- compile
+ customize-group
+ org-mode
 )
 
 ;; ----- smex-data -----
 (
  (package-autoremove . 1)
  (recentf-mode . 1)
- (eval-buffer . 12)
- (customize-group . 8)
+ (eval-buffer . 14)
+ (customize-group . 9)
  (javascript-mode . 2)
  (nodejs-repl . 3)
  (org-agenda . 4)
  (replace-amp . 2)
- (replace-string . 1)
- (scheme-mode . 7)
+ (replace-string . 2)
+ (scheme-mode . 15)
  (package-install . 3)
  (paredit-mode . 3)
  (global-auto-revert-mode . 1)
@@ -32,7 +32,7 @@
  (js2-mode . 4)
  (ident-buffer . 1)
  (hippie-expand . 2)
- (org-mode . 4)
+ (org-mode . 5)
  (customize . 1)
  (info . 1)
  (emacs-lisp-mode . 1)
@@ -49,15 +49,35 @@
  (org-clock-in . 1)
  (describe-bindings . 1)
  (eval-region . 1)
- (tetris . 1)
+ (tetris . 2)
  (ielm . 1)
  (org-pomodoro . 1)
- (package-list-packages . 6)
- (package-delete . 6)
+ (package-list-packages . 13)
+ (package-delete . 7)
  (helm-ag . 2)
  (LaTeX-mode . 2)
  (compile . 1)
  (evil-mode . 4)
  (TeX-mode . 1)
  (getenv . 1)
+ (run-geiser . 19)
+ (calc . 1)
+ (count-words . 4)
+ (graphviz-dot-mode . 1)
+ (graphviz-dot-view . 1)
+ (ediff . 1)
+ (gnus . 2)
+ (gdb . 1)
+ (common-lisp-mode . 2)
+ (haskell-menu . 1)
+ (haskell-mode . 2)
+ (kill-buffer . 1)
+ (pascal-mode . 1)
+ (cedit-barf . 1)
+ (c-mode . 1)
+ (cedit-slurp . 1)
+ (cedit-wrap-brace . 1)
+ (cedit-raise . 1)
+ (cedit-backward-char . 1)
+ (cedit-splice-killing-backward . 1)
 )

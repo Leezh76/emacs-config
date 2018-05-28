@@ -102,4 +102,13 @@
 (autoload 'cdlatex-mode "cdlatex" "CDLaTeX Mode" t)
 (autoload 'turn-on-cdlatex "cdlatex" "CDLaTeX Mode" nil)
 
+
+;; geiser
+(setq scheme-program-name "chez")
+(setq geiser-chez-binary "chez")
+(setq geiser-active-implementations '(chez))
+
+;; company settings
+
+
 (provide 'init-better-defaults)

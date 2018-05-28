@@ -34,6 +34,11 @@
 		 evil
 		 auctex
 		 cdlatex
+		 geiser
+		 use-package
+		 graphviz-dot-mode
+		 haskell-mode
+		 ;;cedit
 		 ) "Default packages")
 (setq packages-selected-packages 'my/pkgs)
 
@@ -81,7 +86,9 @@
 (setq auto-mode-alist
       (append
        '(("\\.js\\'" . js2-mode)
-	 ("\\.html\\'" . web-mode))
+	 ("\\.html\\'" . web-mode)
+	 ("\\.dot\\'" . graphviz-dot-mode)
+	 ("\\.hs\\'" . haskell-mode))
        auto-mode-alist))
 
 ;; config for web mode
@@ -139,13 +146,9 @@
 
 ;;(global-set-key (kbd "M-s e") 'iedit-mode)
 
-;(require 'org-pomodoro)
-
 (add-hook 'js2-mode 'flycheck-mode)
 
 (yas-reload-all)
 (add-hook 'prog-mode-hook #'yas-minor-mode)
-
-
 
 (provide 'init-packages)
