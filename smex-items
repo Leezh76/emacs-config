@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- package-delete
  package-list-packages
+ cider-jack-in
+ package-delete
  midnight-mode
  clojure-mode
  run-geiser
  haskell-process-restart
- scheme-mode
 )
 
 ;; ----- smex-data -----
@@ -52,7 +52,7 @@
  (tetris . 2)
  (ielm . 1)
  (org-pomodoro . 1)
- (package-list-packages . 18)
+ (package-list-packages . 19)
  (package-delete . 10)
  (helm-ag . 2)
  (LaTeX-mode . 2)
@@ -83,4 +83,5 @@
  (haskell-process-restart . 1)
  (clojure-mode . 1)
  (midnight-mode . 2)
+ (cider-jack-in . 1)
 )

@@ -30,6 +30,7 @@
 		  helm-ag
 		  flycheck
 		  ivy
+		  company-flx
 		  ;;latex
 		  auctex
 		  cdlatex
