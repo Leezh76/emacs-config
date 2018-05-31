@@ -84,8 +84,11 @@
 
 (require 'paredit)
 (add-hook 'scheme-mode-hook (lambda () (paredit-mode 1)))
+(add-hook 'clojure-mode-hook (lambda () (paredit-mode 1)))
 
 (global-company-mode 1)
+(with-eval-after-load 'company
+  (company-flx-mode +1))
 
 ;; config js2-mode for js files
 (setq auto-mode-alist
