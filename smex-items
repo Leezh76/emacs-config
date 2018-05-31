@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- run-geiser
- scheme-mode
  package-delete
  package-list-packages
- eval-buffer
- customize-group
- org-mode
+ midnight-mode
+ clojure-mode
+ run-geiser
+ haskell-process-restart
+ scheme-mode
 )
 
 ;; ----- smex-data -----
@@ -52,15 +52,15 @@
  (tetris . 2)
  (ielm . 1)
  (org-pomodoro . 1)
- (package-list-packages . 13)
- (package-delete . 7)
+ (package-list-packages . 18)
+ (package-delete . 10)
  (helm-ag . 2)
  (LaTeX-mode . 2)
  (compile . 1)
  (evil-mode . 4)
  (TeX-mode . 1)
  (getenv . 1)
- (run-geiser . 19)
+ (run-geiser . 20)
  (calc . 1)
  (count-words . 4)
  (graphviz-dot-mode . 1)
@@ -80,4 +80,7 @@
  (cedit-raise . 1)
  (cedit-backward-char . 1)
  (cedit-splice-killing-backward . 1)
+ (haskell-process-restart . 1)
+ (clojure-mode . 1)
+ (midnight-mode . 2)
 )

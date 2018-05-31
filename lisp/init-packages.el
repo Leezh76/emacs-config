@@ -10,35 +10,39 @@
 (require 'cl)
 ;;add package here
 (defvar my/pkgs '(
-		 company
-		 solarized-theme
-		 hungry-delete
-		 smex
-		 smartparens
-		 js2-mode
-		 js2-refactor
-		 nodejs-repl
-		 exec-path-from-shell
-		 window-numbering
-		 paredit
-		 popwin
-		 counsel
-		 web-mode
-		 expand-region
-		 iedit
-		 ;; org-pomodoro
-		 helm-ag
-		 flycheck
-		 ;;auto-yasnippet
-		 ivy
-		 evil
-		 auctex
-		 cdlatex
-		 geiser
-		 use-package
-		 graphviz-dot-mode
-		 haskell-mode
-		 ;;cedit
+		  company
+		  use-package
+		  solarized-theme
+		  hungry-delete
+		  smex
+		  smartparens
+		  js2-mode
+		  js2-refactor
+		  nodejs-repl
+		  exec-path-from-shell
+		  window-numbering
+		  paredit
+		  popwin
+		  counsel
+		  web-mode
+		  expand-region
+		  iedit
+		  helm-ag
+		  flycheck
+		  ivy
+		  ;;latex
+		  auctex
+		  cdlatex
+		  ;;scheme
+		  geiser
+		  ;;dot
+		  graphviz-dot-mode
+		  ;;haskell
+		  haskell-mode
+		  ;;clojure
+		  clojure-mode
+		  ;;clj-refactor
+		  ;;midje-mode
 		 ) "Default packages")
 (setq packages-selected-packages 'my/pkgs)
 
