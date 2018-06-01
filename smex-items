@@ -1,26 +1,26 @@
 
 ;; ----- smex-history -----
 (
+ eval-buffer
+ replace-string
  package-list-packages
  cider-jack-in
  package-delete
  midnight-mode
  clojure-mode
- run-geiser
- haskell-process-restart
 )
 
 ;; ----- smex-data -----
 (
  (package-autoremove . 1)
  (recentf-mode . 1)
- (eval-buffer . 14)
+ (eval-buffer . 20)
  (customize-group . 9)
  (javascript-mode . 2)
  (nodejs-repl . 3)
  (org-agenda . 4)
  (replace-amp . 2)
- (replace-string . 2)
+ (replace-string . 3)
  (scheme-mode . 15)
  (package-install . 3)
  (paredit-mode . 3)

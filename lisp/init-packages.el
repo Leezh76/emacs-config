@@ -68,7 +68,7 @@
 (require 'smex)
 (smex-initialize)
 
-(load-theme 'solarized-light t)
+(load-theme 'solarized-dark t)
 
 ;;(require 'smartparens-config)
 ;;autoload don't need to require
