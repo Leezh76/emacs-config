@@ -16,6 +16,7 @@
  '(package-selected-packages
    (quote
     (scheme-complete smex solarized-theme hungry-delete company)))
+ '(popwin:popup-window-position (quote right))
  '(popwin:popup-window-width 50))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- eval-buffer
- replace-string
- package-list-packages
+ ruby-mode
+ paredit-mode
  cider-jack-in
+ customize-group
  package-delete
- midnight-mode
- clojure-mode
+ package-list-packages
+ eval-buffer
 )
 
 ;; ----- smex-data -----
@@ -15,7 +15,7 @@
  (package-autoremove . 1)
  (recentf-mode . 1)
  (eval-buffer . 20)
- (customize-group . 9)
+ (customize-group . 10)
  (javascript-mode . 2)
  (nodejs-repl . 3)
  (org-agenda . 4)
@@ -23,7 +23,7 @@
  (replace-string . 3)
  (scheme-mode . 15)
  (package-install . 3)
- (paredit-mode . 3)
+ (paredit-mode . 5)
  (global-auto-revert-mode . 1)
  (term . 1)
  (find-function . 1)
@@ -52,8 +52,8 @@
  (tetris . 2)
  (ielm . 1)
  (org-pomodoro . 1)
- (package-list-packages . 19)
- (package-delete . 10)
+ (package-list-packages . 20)
+ (package-delete . 11)
  (helm-ag . 2)
  (LaTeX-mode . 2)
  (compile . 1)
@@ -83,5 +83,9 @@
  (haskell-process-restart . 1)
  (clojure-mode . 1)
  (midnight-mode . 2)
- (cider-jack-in . 1)
+ (cider-jack-in . 2)
+ (4clojure-open-question . 1)
+ (4clojure-next-question . 1)
+ (cider-repl-clear-help-banner . 1)
+ (ruby-mode . 1)
 )

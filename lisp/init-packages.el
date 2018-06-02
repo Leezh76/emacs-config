@@ -42,8 +42,8 @@
 		  haskell-mode
 		  ;;clojure
 		  clojure-mode
-		  ;;clj-refactor
-		  ;;midje-mode
+		  ;;4clojure
+		  ;;cider
 		 ) "Default packages")
 (setq packages-selected-packages 'my/pkgs)
 
