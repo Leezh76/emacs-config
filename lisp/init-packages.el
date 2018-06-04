@@ -44,6 +44,9 @@
 		  clojure-mode
 		  ;;4clojure
 		  ;;cider
+
+		  ;;io-mode
+		  io-mode
 		 ) "Default packages")
 (setq packages-selected-packages 'my/pkgs)
 

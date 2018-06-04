@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
+ io-mode
+ package-list-packages
  ruby-mode
  paredit-mode
  cider-jack-in
  customize-group
  package-delete
- package-list-packages
- eval-buffer
 )
 
 ;; ----- smex-data -----
@@ -52,7 +52,7 @@
  (tetris . 2)
  (ielm . 1)
  (org-pomodoro . 1)
- (package-list-packages . 20)
+ (package-list-packages . 22)
  (package-delete . 11)
  (helm-ag . 2)
  (LaTeX-mode . 2)
@@ -88,4 +88,5 @@
  (4clojure-next-question . 1)
  (cider-repl-clear-help-banner . 1)
  (ruby-mode . 1)
+ (io-mode . 2)
 )
