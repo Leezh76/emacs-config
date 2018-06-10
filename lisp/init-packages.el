@@ -42,11 +42,14 @@
 		  haskell-mode
 		  ;;clojure
 		  clojure-mode
-		  ;;4clojure
 		  ;;cider
 
-		  ;;io-mode
+		  ;;io
 		  io-mode
+		  ;;scala
+		  scala-mode
+		  ;;erlang
+		  erlang
 		 ) "Default packages")
 (setq packages-selected-packages 'my/pkgs)
 
