@@ -2,12 +2,12 @@
 ;; ----- smex-history -----
 (
  package-list-packages
- prolog-mode
- customize-group
- eval-buffer
- c-mode
- c++-mode
- io-mode
+ package-install
+ tetris
+ clojure-mode
+ 4clojure-check-answers
+ 4clojure-open-question
+ 4clojure-next-question
 )
 
 ;; ----- smex-data -----
@@ -22,8 +22,8 @@
  (replace-amp . 2)
  (replace-string . 3)
  (scheme-mode . 15)
- (package-install . 3)
- (paredit-mode . 5)
+ (package-install . 4)
+ (paredit-mode . 7)
  (global-auto-revert-mode . 1)
  (term . 1)
  (find-function . 1)
@@ -41,7 +41,7 @@
  (ibuffer . 1)
  (html-mode . 1)
  (web-mode . 4)
- (counsel-imenu . 3)
+ (counsel-imenu . 4)
  (customize-variable . 1)
  (occur-edit-mode . 2)
  (iedit-mode . 1)
@@ -49,10 +49,10 @@
  (org-clock-in . 1)
  (describe-bindings . 1)
  (eval-region . 1)
- (tetris . 2)
+ (tetris . 3)
  (ielm . 1)
  (org-pomodoro . 1)
- (package-list-packages . 24)
+ (package-list-packages . 29)
  (package-delete . 11)
  (helm-ag . 2)
  (LaTeX-mode . 2)
@@ -81,13 +81,18 @@
  (cedit-backward-char . 1)
  (cedit-splice-killing-backward . 1)
  (haskell-process-restart . 1)
- (clojure-mode . 1)
+ (clojure-mode . 2)
  (midnight-mode . 2)
  (cider-jack-in . 2)
- (4clojure-open-question . 1)
- (4clojure-next-question . 1)
+ (4clojure-open-question . 3)
+ (4clojure-next-question . 2)
  (cider-repl-clear-help-banner . 1)
  (ruby-mode . 1)
  (io-mode . 2)
  (prolog-mode . 4)
+ (imenu . 1)
+ (origami-close-node . 1)
+ (poly-markdown-mode . 2)
+ (load-theme . 1)
+ (4clojure-check-answers . 4)
 )

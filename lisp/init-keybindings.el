@@ -27,7 +27,7 @@
 
 (global-set-key (kbd "C-c p s") 'helm-do-ag-project-root)
 
-(global-set-key (kbd "C-w") 'backward-kill-word)
+;;(global-set-key (kbd "C-w") 'backward-kill-word)
 
 (global-set-key (kbd "C-c d") 'kid-sdcv-to-buffer)
 (defun kid-sdcv-to-buffer ()

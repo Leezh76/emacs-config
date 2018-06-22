@@ -31,6 +31,7 @@
 		  flycheck
 		  ivy
 		  company-flx
+		  origami
 		  ;;latex
 		  auctex
 		  cdlatex
@@ -42,8 +43,9 @@
 		  haskell-mode
 		  ;;clojure
 		  clojure-mode
-		  ;;cider
-
+		  4clojure
+		  ;;markdoen
+		  markdown-mode
 		  ;;io
 		  io-mode
 		  ;;scala
@@ -74,7 +76,7 @@
 (require 'smex)
 (smex-initialize)
 
-(load-theme 'solarized-dark t)
+(load-theme 'solarized-light t)
 
 ;;(require 'smartparens-config)
 ;;autoload don't need to require
@@ -164,5 +166,8 @@
 
 (yas-reload-all)
 (add-hook 'prog-mode-hook #'yas-minor-mode)
+
+(require 'origami)
+;;(global-origami-mode 1)
 
 (provide 'init-packages)

@@ -110,5 +110,6 @@
 
 ;; company settings
 
+(eval-after-load "org" '(require 'ox-md nil t))
 
 (provide 'init-better-defaults)

@@ -12,6 +12,8 @@
  '(haskell-process-args-cabal-repl
    (quote
     ("--ghc-option=-ferror-spans -fshow-loaded-modules")))
+ '(markdown-command
+   "pandoc -f markdown -t html -s –mathjax –highlight-style pygments")
  '(org-pomodoro-length 40)
  '(package-selected-packages
    (quote
